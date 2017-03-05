@@ -1,0 +1,65 @@
+package Images;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.Random;
+
+
+public class FourwayImage {
+    public static  void Generate(BufferedImage bi,String xvalues[],String yvalues[],int xfact, int yfact,int dxfact, int dyfact)
+    {
+       
+       try
+       {
+        Graphics g=bi.getGraphics();
+      Random rm=new Random();
+      int re,gr,bl;
+          g.setColor(Color.WHITE);
+          Font f=new Font("Arial",Font.BOLD,30);
+       
+          
+   g.drawString("IT-EDU:Auto Generated Image",290,30);
+    g.drawLine(250,0,250,500);
+    g.drawLine(0,250,500,250);
+    int xdivide=230/dxfact;
+    int xdiff=xfact/dxfact;
+   System.out.println(xdivide);
+  
+    for(int i=0;i<dxfact;i++)
+               {
+    g.drawLine(20+(xdivide*i),250,20+(xdivide*i),245);
+    g.drawLine(480-(xdivide*i),250,480-(xdivide*i),245);
+    if(xfact-(xdiff*i)>=10)
+    {
+        g.drawString(String.valueOf(-(xfact-(xdiff*i))),20+(xdivide*i)-7,239);
+        g.drawString(String.valueOf(xfact-(xdiff*i)),480-(xdivide*i)-7,239);
+  
+    }
+    else
+    {
+        g.drawString(String.valueOf(-(xfact-(xdiff*i))),20+(xdivide*i)-3,239);
+    g.drawString(String.valueOf(xfact-(xdiff*i)),480-(xdivide*i)-3,239);
+  
+    }
+        
+       
+    
+               }
+    int ydivide=230/dyfact;
+    
+    for(int j=0;j<dyfact;j++)
+               {
+    g.drawLine(250,20+(ydivide*j),255,20+(ydivide*j));
+    g.drawLine(250,250+(ydivide*(j+1)),255,250+(ydivide*(j+1)));
+    
+               } }
+    
+    catch(Exception e)
+    {
+        System.out.println(e.toString() + e.getMessage() );
+    }
+
+    }
+}

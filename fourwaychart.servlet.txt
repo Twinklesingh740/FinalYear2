@@ -1,0 +1,60 @@
+package ChartServlets;
+
+import Images.FourwayImage;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class fourwaychart extends HttpServlet {
+
+   
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+         response.setContentType("image/jpeg");
+OutputStream os=response.getOutputStream();
+       
+        BufferedImage bi=new BufferedImage(500, 500,BufferedImage.TYPE_INT_RGB);
+      int xfact=Integer.valueOf(request.getParameter("xfact"));
+       System.out.println(xfact);
+       
+      int yfact=Integer.valueOf(request.getParameter("yfact"));
+      System.out.println(yfact);
+        
+      int dxfact=Integer.valueOf(request.getParameter("dxfact"));
+      System.out.println(dxfact);
+       
+      int dyfact=Integer.valueOf(request.getParameter("dyfact"));
+      System.out.println(dyfact);
+       String xvals[]=request.getParameterValues("xvalue");
+       String yvals[]=request.getParameterValues("yvalue");
+       
+       FourwayImage.Generate(bi, xvals, yvals,xfact,yfact,dxfact,dyfact);
+           boolean write = ImageIO.write(bi, "jpg", os);
+           
+    }
+
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
+
+}
